@@ -1,6 +1,6 @@
 ﻿namespace IntegraBrasilAPI.Services.Services.Interfaces
 {
-    internal interface IEnderecoService
+    public interface IEnderecoService
     {
     }
 }
