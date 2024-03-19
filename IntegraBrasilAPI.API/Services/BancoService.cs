@@ -1,18 +1,33 @@
-﻿using IntegraBrasilAPI.API.DTOs;
+﻿using AutoMapper;
+using IntegraBrasilAPI.API.DTOs;
+using IntegraBrasilAPI.API.Rest.Interfaces;
 using IntegraBrasilAPI.API.Services.Interfaces;
 
 namespace IntegraBrasilAPI.API.Services
 {
     public class BancoService : IBancoService
     {
-        public Task<ResponseGenerico<BancoResponse>> BuscarBancoPorCodigo(string codigo)
+        private readonly IMapper _mapper;
+        private readonly IBrasilApiRest _brasilApi;
+
+        public BancoService(IMapper mapper, IBrasilApiRest brasilApi)
         {
-            throw new NotImplementedException();
+            _mapper = mapper;
+            _brasilApi = brasilApi;
         }
 
-        public Task<ResponseGenerico<List<BancoResponse>>> BuscarBancos()
+        public async Task<ResponseGenerico<List<BancoResponse>>> BuscarBancos()
         {
-            throw new NotImplementedException();
+            var bancos = await _brasilApi.BuscarBancos();
+
+            return _mapper.Map<ResponseGenerico<List<BancoResponse>>>(bancos);
+        }
+
+        public async Task<ResponseGenerico<BancoResponse>> BuscarBancoPorCodigo(string codigo)
+        {
+            var banco = await _brasilApi.BuscarBancoPorCodigo(codigo);
+
+            return _mapper.Map<ResponseGenerico<BancoResponse>>(banco);
         }
     }
 }
