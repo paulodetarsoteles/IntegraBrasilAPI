@@ -5,15 +5,15 @@ namespace IntegraBrasilAPI.Domain.Models
     public class Banco
     {
         [JsonPropertyName("ispb")]
-        public string Ispb { get; set; } = string.Empty;
+        public string? Ispb { get; set; }
 
         [JsonPropertyName("name")]
-        public string Nome { get; set; } = string.Empty;
+        public string? Nome { get; set; }
 
         [JsonPropertyName("code")]
-        public int Codigfo { get; set; }
+        public int? Codigo { get; set; }
 
-        [JsonPropertyName("fullname")]
+        [JsonPropertyName("fullName")]
         public string? NomeCompleto { get; set; }
     }
 }

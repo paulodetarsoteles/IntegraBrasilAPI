@@ -5,13 +5,13 @@ namespace IntegraBrasilAPI.Domain.Models
     public class Endereco
     {
         [JsonPropertyName("cep")]
-        public string Cep { get; set; } = string.Empty;
+        public string? Cep { get; set; }
 
         [JsonPropertyName("state")]
-        public string Estado { get; set; } = string.Empty;
+        public string? Estado { get; set; }
 
         [JsonPropertyName("city")]
-        public string Cidade { get; set; } = string.Empty;
+        public string? Cidade { get; set; }
 
         [JsonPropertyName("neighborhood")]
         public string? Bairro { get; set; }

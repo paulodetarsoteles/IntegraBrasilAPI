@@ -2,11 +2,11 @@
 {
     public class BancoResponse
     {
-        public string Ispb { get; set; } = string.Empty;
+        public string? Ispb { get; set; }
 
-        public string NomeAbreviado { get; set; } = string.Empty;
+        public string? Nome { get; set; }
 
-        public int Codigo { get; set; }
+        public int? Codigo { get; set; }
 
         public string? NomeCompleto {  get; set; }
     }
