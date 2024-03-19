@@ -18,6 +18,7 @@ namespace IntegraBrasilAPI.API.Controllers
         [HttpGet]
         public IActionResult Index() => Ok();
 
+        [HttpGet("BuscarEnderecoPorCep/{cep}")]
         public async Task<IActionResult> BuscarEnderecoPorCep([FromRoute] string cep)
         {
             if (cep == null || cep.Any(x => char.IsLetter(x)))

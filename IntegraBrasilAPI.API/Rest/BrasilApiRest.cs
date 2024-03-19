@@ -13,16 +13,16 @@ namespace IntegraBrasilAPI.API.Rest
         public BrasilApiRest(IConfiguration configuration) =>
             _configuration = configuration;
 
-        public async Task<ResponseGenerico<Domain.Models.Endereco>> BuscarEndercoPorCEP(string cep)
+        public async Task<ResponseGenerico<Endereco>> BuscarEndercoPorCEP(string cep)
         {
             try
             {
                 string? url = _configuration.GetSection("BrasilApiUrl").Value ?? 
                     throw new Exception("Erro ao capturar url no arquivo de configuração.");
 
-                HttpRequestMessage request = new(HttpMethod.Get, $"{url}banks/v1/{cep}");
+                HttpRequestMessage request = new(HttpMethod.Get, $"{url}cep/v1/{cep}");
 
-                ResponseGenerico<Domain.Models.Endereco> response = new();
+                ResponseGenerico<Endereco> response = new();
 
                 HttpClient client = new();
 
@@ -31,7 +31,7 @@ namespace IntegraBrasilAPI.API.Rest
 
                 string contentResponse = await responseBrasilApi.Content.ReadAsStringAsync();
 
-                Domain.Models.Endereco? objectResponse = JsonSerializer.Deserialize<Domain.Models.Endereco>(contentResponse);
+                Endereco? objectResponse = JsonSerializer.Deserialize<Endereco>(contentResponse);
 
                 response.CodigoHttp = responseBrasilApi.StatusCode;
 
