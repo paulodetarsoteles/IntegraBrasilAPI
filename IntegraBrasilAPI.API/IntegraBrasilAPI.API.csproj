@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IntegraBrasilAPI.Domain\IntegraBrasilAPI.Domain.csproj" />
-    <ProjectReference Include="..\IntegraBrasilAPI.Services\IntegraBrasilAPI.Services.csproj" />
   </ItemGroup>
 
 </Project>

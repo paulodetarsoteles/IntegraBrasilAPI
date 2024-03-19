@@ -13,7 +13,7 @@ namespace IntegraBrasilAPI.API.Rest
         public BrasilApiRest(IConfiguration configuration) =>
             _configuration = configuration;
 
-        public async Task<ResponseGenerico<Endereco>> BuscarEndercoPorCEP(string cep)
+        public async Task<ResponseGenerico<Domain.Models.Endereco>> BuscarEndercoPorCEP(string cep)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace IntegraBrasilAPI.API.Rest
 
                 HttpRequestMessage request = new(HttpMethod.Get, $"{url}banks/v1/{cep}");
 
-                ResponseGenerico<Endereco> response = new();
+                ResponseGenerico<Domain.Models.Endereco> response = new();
 
                 HttpClient client = new();
 
@@ -31,7 +31,7 @@ namespace IntegraBrasilAPI.API.Rest
 
                 string contentResponse = await responseBrasilApi.Content.ReadAsStringAsync();
 
-                Endereco? objectResponse = JsonSerializer.Deserialize<Endereco>(contentResponse);
+                Domain.Models.Endereco? objectResponse = JsonSerializer.Deserialize<Domain.Models.Endereco>(contentResponse);
 
                 response.CodigoHttp = responseBrasilApi.StatusCode;
 
