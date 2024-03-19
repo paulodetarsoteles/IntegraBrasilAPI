@@ -2,7 +2,7 @@
 
 namespace IntegraBrasilAPI.API.DTOs
 {
-    public class EnderecoResponse
+    public class EnderecoModel
     {
         public string Cep { get; set; } = string.Empty;
 
