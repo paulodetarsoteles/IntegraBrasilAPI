@@ -1,4 +1,8 @@
+using IntegraBrasilAPI.API.Injectors;
+
 var builder = WebApplication.CreateBuilder(args);
+
+InjectorService.Configure(builder.Services);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -13,9 +17,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
