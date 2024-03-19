@@ -1,6 +1,8 @@
 ﻿using IntegraBrasilAPI.API.Services.Interfaces;
+using IntegraBrasilAPI.API.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Runtime.ConstrainedExecution;
 
 namespace IntegraBrasilAPI.API.Controllers
 {
@@ -38,8 +40,8 @@ namespace IntegraBrasilAPI.API.Controllers
         {
             try
             {
-                if (codigo == null || codigo.Any(x => char.IsLetter(x)))
-                    return BadRequest();
+                if (!Validators.ValidatorBankCode(codigo))
+                    return BadRequest(new { message = $"Erro no Código informado. {codigo}" });
 
                 var response = await _bancoService.BuscarBancoPorCodigo(codigo);
 

@@ -1,4 +1,5 @@
 ﻿using IntegraBrasilAPI.API.Services.Interfaces;
+using IntegraBrasilAPI.API.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -20,8 +21,8 @@ namespace IntegraBrasilAPI.API.Controllers
         {
             try
             {
-                if (cep == null || cep.Any(x => char.IsLetter(x)))
-                    return BadRequest();
+                if (!Validators.ValidatorCep(cep))
+                    return BadRequest(new { message = $"Erro no CEP informado. {cep}" });
 
                 var response = await _enderecoService.BuscarEndercoPorCEP(cep);
 
