@@ -33,7 +33,7 @@ namespace IntegraBrasilAPI.API.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("BuscarBancoPorCodigo/{codigo}")]
         public async Task<IActionResult> BuscarBancoPorCodigo([FromRoute] string codigo)
         {
             try
