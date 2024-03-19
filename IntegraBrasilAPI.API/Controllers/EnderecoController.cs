@@ -10,10 +10,7 @@ namespace IntegraBrasilAPI.API.Controllers
     {
         private readonly IEnderecoService _enderecoService;
 
-        public EnderecoController(IEnderecoService enderecoService)
-        {
-            _enderecoService = enderecoService;
-        }
+        public EnderecoController(IEnderecoService enderecoService) => _enderecoService = enderecoService;
 
         [HttpGet]
         public IActionResult Index() => Ok();
@@ -21,15 +18,22 @@ namespace IntegraBrasilAPI.API.Controllers
         [HttpGet("BuscarEnderecoPorCep/{cep}")]
         public async Task<IActionResult> BuscarEnderecoPorCep([FromRoute] string cep)
         {
-            if (cep == null || cep.Any(x => char.IsLetter(x)))
-                return BadRequest();
+            try
+            {
+                if (cep == null || cep.Any(x => char.IsLetter(x)))
+                    return BadRequest();
 
-            var response = await _enderecoService.BuscarEndercoPorCEP(cep);
+                var response = await _enderecoService.BuscarEndercoPorCEP(cep);
 
-            if (response.CodigoHttp != HttpStatusCode.OK)
-                return StatusCode((int)response.CodigoHttp, response.ErroRetorno);
+                if (response.CodigoHttp != HttpStatusCode.OK)
+                    return StatusCode((int)response.CodigoHttp, response.ErroRetorno);
 
-            return Ok(response.DadosRetorno);
+                return Ok(response.DadosRetorno);
+            }
+            catch (Exception e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
         }
     }
 }
